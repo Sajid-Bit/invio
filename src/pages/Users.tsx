@@ -217,33 +217,41 @@ const Users = () => {
       {/* Right Side: Users List & Activity */}
       <div className="flex-1 flex flex-col gap-6 overflow-hidden">
         {/* Header */}
+        {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="flex gap-2 bg-white/50 backdrop-blur p-1 rounded-xl border border-white/40 shadow-sm">
-            {(['الكل', 'المشرفون', 'المحاسبون', 'المعلمون'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-sm rounded-lg transition-all font-bold ${activeTab === tab
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
-                  }`}
-              >
-                {tab}
-              </button>
-            ))}
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800 tracking-tight">المستخدمين 👥</h1>
+            <p className="text-sm text-gray-500 mt-1">إدارة المستخدمين والصلاحيات</p>
           </div>
 
-          <div className="relative group">
-            <input
-              type="text"
-              placeholder="بحث..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-4 pr-10 py-2.5 text-sm bg-white/80 border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all w-64 shadow-sm"
-            />
-            <svg className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 group-focus-within:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2 bg-white/50 backdrop-blur p-1 rounded-xl border border-white/40 shadow-sm">
+              {(['الكل', 'المشرفون', 'المحاسبون', 'المعلمون'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-2 text-sm rounded-lg transition-all font-bold ${activeTab === tab
+                    ? 'bg-white text-primary-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
+                    }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <div className="relative group">
+              <input
+                type="text"
+                placeholder="بحث..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-4 pr-10 py-2.5 text-sm bg-white/80 border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all w-64 shadow-sm"
+              />
+              <svg className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 group-focus-within:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
           </div>
         </div>
 

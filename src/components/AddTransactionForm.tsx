@@ -64,8 +64,22 @@ const AddTransactionForm = () => {
     <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-soft p-6 border border-white/20 h-full flex flex-col relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 rounded-full -mr-16 -mt-16 blur-2xl transition-all group-hover:bg-primary-500/10" />
 
-      <h2 className="text-xl font-bold mb-6 text-center text-gray-800 relative z-10">
-        {editingId ? '✏️ تعديل منصرف' : '💸 إضافة منصرف'}
+      <h2 className="text-xl font-bold mb-6 text-center text-gray-800 relative z-10 flex items-center justify-center gap-2">
+        {editingId ? (
+          <>
+            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>تعديل منصرف</span>
+          </>
+        ) : (
+          <>
+            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span>إضافة منصرف</span>
+          </>
+        )}
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col relative z-10">

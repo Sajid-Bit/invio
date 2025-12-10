@@ -60,7 +60,10 @@ const Dashboard = () => {
                 <span className="text-sm font-bold text-gray-400">ج.س</span>
               </div>
               <div className="mt-4 flex items-center gap-2 text-xs font-bold text-primary-600 bg-primary-50 w-fit px-2 py-1 rounded-lg">
-                <span>📊</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                </svg>
                 <span>الميزانية اليومية</span>
               </div>
             </div>
@@ -76,7 +79,15 @@ const Dashboard = () => {
               </div>
               <div className={`mt-4 flex items-center gap-2 text-xs font-bold w-fit px-2 py-1 rounded-lg ${isOverBudget ? 'text-red-600 bg-red-50' : 'text-secondary-600 bg-secondary-50'
                 }`}>
-                <span>{isOverBudget ? '📉' : '📈'}</span>
+                {isOverBudget ? (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                )}
                 <span>{isOverBudget ? 'تجاوز الميزانية' : 'في الحدود الآمنة'}</span>
               </div>
             </div>
@@ -86,7 +97,11 @@ const Dashboard = () => {
           <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-white/40 shadow-soft">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm">💳</div>
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800">مؤشر الإنفاق</p>
                   <p className="text-[10px] text-gray-500">نسبة الاستهلاك من الميزانية</p>
@@ -99,8 +114,8 @@ const Dashboard = () => {
             <div className="w-full bg-gray-100 rounded-full h-4 overflow-hidden shadow-inner">
               <div
                 className={`h-full rounded-full transition-all duration-1000 ease-out relative ${isOverBudget
-                    ? 'bg-gradient-to-r from-red-500 to-red-600'
-                    : 'bg-gradient-to-r from-primary-500 to-primary-600'
+                  ? 'bg-gradient-to-r from-red-500 to-red-600'
+                  : 'bg-gradient-to-r from-primary-500 to-primary-600'
                   }`}
                 style={{ width: `${Math.min(spendingPercentage, 100)}%` }}
               >
@@ -113,7 +128,9 @@ const Dashboard = () => {
           <div className="bg-white/60 backdrop-blur-xl rounded-2xl shadow-soft border border-white/40 flex-1 overflow-hidden flex flex-col">
             <div className="p-5 border-b border-gray-100/50 flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                <span>📝</span>
+                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
                 سجل المصروفات
               </h3>
               <span className="text-xs font-bold text-gray-400 bg-gray-50 px-2 py-1 rounded-lg">
@@ -135,7 +152,11 @@ const Dashboard = () => {
                     <tr>
                       <td colSpan={4} className="px-4 py-12 text-center text-gray-400">
                         <div className="flex flex-col items-center gap-2">
-                          <span className="text-4xl opacity-50">📭</span>
+                          <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-2">
+                            <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                            </svg>
+                          </div>
                           <p className="font-medium">لا توجد مصروفات حتى الآن</p>
                         </div>
                       </td>

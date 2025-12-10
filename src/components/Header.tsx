@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="px-8 py-5 flex items-center justify-between z-20">
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">مرحباً بك 👋</h2>
+        <h2 className="text-2xl font-bold text-gray-800 tracking-tight">مرحباً بك </h2>
         <p className="text-sm text-gray-500 mt-1 font-medium">{currentDate}</p>
       </div>
 

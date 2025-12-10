@@ -84,182 +84,195 @@ const Users = () => {
   };
 
   return (
-    <div className="h-full flex gap-6">
-      {/* Left Side: User Form */}
-      <div className="w-96 bg-white/80 backdrop-blur-xl rounded-2xl shadow-soft border border-white/20 p-6 flex flex-col relative overflow-hidden group">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 rounded-full -mr-16 -mt-16 blur-2xl transition-all group-hover:bg-primary-500/10" />
-
-        <h2 className="text-xl font-bold text-gray-800 mb-6 relative z-10 flex items-center gap-2">
-          <span>{editingUser ? '✏️' : '👤'}</span>
-          {editingUser ? 'تعديل مستخدم' : 'إضافة مستخدم جديد'}
-        </h2>
-
-        <div className="flex-1 space-y-5 overflow-auto custom-scrollbar relative z-10 p-1">
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">المعلومات الأساسية</label>
-            <input
-              type="text"
-              placeholder="اسم المستخدم"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              disabled={!!editingUser}
-              className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all disabled:bg-gray-50 disabled:text-gray-400 font-medium"
-            />
-            <p className="text-[10px] text-gray-400 px-1">
-              {editingUser ? 'لا يمكن تعديل اسم المستخدم' : 'استخدم حروف إنجليزية (مثال: school.admin)'}
-            </p>
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">الاسم الكامل</label>
-            <input
-              type="text"
-              value={formData.full_name}
-              onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-              className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">الدور الوظيفي</label>
-            <div className="relative">
-              <select
-                value={formData.role}
-                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all appearance-none font-medium text-gray-700"
-              >
-                <option value="مشرف">مشرف</option>
-                <option value="محاسب">محاسب</option>
-                <option value="موظف">موظف</option>
-                <option value="معلم">معلم</option>
-              </select>
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">القسم</label>
-            <input
-              type="text"
-              value={formData.department}
-              onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-              className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">حالة الحساب</label>
-            <div className="flex bg-gray-100/50 p-1 rounded-xl border border-gray-200/50">
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, status: 'مفعل' })}
-                className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all font-bold ${formData.status === 'مفعل'
-                  ? 'bg-white text-green-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
-                  }`}
-              >
-                مفعل
-              </button>
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, status: 'معطل' })}
-                className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all font-bold ${formData.status === 'معطل'
-                  ? 'bg-white text-red-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
-                  }`}
-              >
-                معطل
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">كلمة المرور</label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              placeholder="••••••••"
-              className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
-            />
-          </div>
+    <div className="h-full flex flex-col gap-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800 tracking-tight flex items-center gap-2">
+            <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            المستخدمين
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">إدارة المستخدمين والصلاحيات</p>
         </div>
 
-        <div className="mt-6 space-y-3 relative z-10">
-          <button
-            onClick={handleSubmit}
-            className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-xl hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all active:scale-95 font-bold text-sm flex items-center justify-center gap-2"
-          >
-            <span>{editingUser ? 'تحديث البيانات' : 'حفظ المستخدم'}</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </button>
+        <div className="flex items-center gap-4">
+          <div className="flex gap-2 bg-white/50 backdrop-blur p-1 rounded-xl border border-white/40 shadow-sm">
+            {(['الكل', 'المشرفون', 'المحاسبون', 'المعلمون'] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 text-sm rounded-lg transition-all font-bold ${activeTab === tab
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
 
-          {editingUser && (
-            <button
-              onClick={() => {
-                setEditingUser(null);
-                resetForm();
-              }}
-              className="w-full py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition-all font-bold text-sm"
-            >
-              إلغاء
-            </button>
-          )}
+          <div className="relative group">
+            <input
+              type="text"
+              placeholder="بحث..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-4 pr-10 py-2.5 text-sm bg-white/80 border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all w-64 shadow-sm"
+            />
+            <svg className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 group-focus-within:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
         </div>
       </div>
 
-      {/* Right Side: Users List & Activity */}
-      <div className="flex-1 flex flex-col gap-6 overflow-hidden">
-        {/* Header */}
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800 tracking-tight">المستخدمين 👥</h1>
-            <p className="text-sm text-gray-500 mt-1">إدارة المستخدمين والصلاحيات</p>
-          </div>
+      <div className="flex-1 flex gap-6 overflow-hidden">
+        {/* Left Side: User Form */}
+        <div className="w-96 bg-white/80 backdrop-blur-xl rounded-2xl shadow-soft border border-white/20 p-6 flex flex-col relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 rounded-full -mr-16 -mt-16 blur-2xl transition-all group-hover:bg-primary-500/10" />
 
-          <div className="flex items-center gap-4">
-            <div className="flex gap-2 bg-white/50 backdrop-blur p-1 rounded-xl border border-white/40 shadow-sm">
-              {(['الكل', 'المشرفون', 'المحاسبون', 'المعلمون'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 text-sm rounded-lg transition-all font-bold ${activeTab === tab
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
-                    }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
+          <h2 className="text-xl font-bold text-gray-800 mb-6 relative z-10 flex items-center gap-2">
+            {editingUser ? (
+              <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+              </svg>
+            )}
+            {editingUser ? 'تعديل مستخدم' : 'إضافة مستخدم جديد'}
+          </h2>
 
-            <div className="relative group">
+          <div className="flex-1 space-y-5 overflow-auto custom-scrollbar relative z-10 p-1">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">المعلومات الأساسية</label>
               <input
                 type="text"
-                placeholder="بحث..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-4 pr-10 py-2.5 text-sm bg-white/80 border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:bg-white transition-all w-64 shadow-sm"
+                placeholder="اسم المستخدم"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                disabled={!!editingUser}
+                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all disabled:bg-gray-50 disabled:text-gray-400 font-medium"
               />
-              <svg className="w-5 h-5 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 group-focus-within:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <p className="text-[10px] text-gray-400 px-1">
+                {editingUser ? 'لا يمكن تعديل اسم المستخدم' : 'استخدم حروف إنجليزية (مثال: school.admin)'}
+              </p>
             </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">الاسم الكامل</label>
+              <input
+                type="text"
+                value={formData.full_name}
+                onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">الدور الوظيفي</label>
+              <div className="relative">
+                <select
+                  value={formData.role}
+                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all appearance-none font-medium text-gray-700"
+                >
+                  <option value="مشرف">مشرف</option>
+                  <option value="محاسب">محاسب</option>
+                  <option value="موظف">موظف</option>
+                  <option value="معلم">معلم</option>
+                </select>
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">القسم</label>
+              <input
+                type="text"
+                value={formData.department}
+                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">حالة الحساب</label>
+              <div className="flex bg-gray-100/50 p-1 rounded-xl border border-gray-200/50">
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, status: 'مفعل' })}
+                  className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all font-bold ${formData.status === 'مفعل'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                  مفعل
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, status: 'معطل' })}
+                  className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all font-bold ${formData.status === 'معطل'
+                    ? 'bg-white text-red-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                  معطل
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">كلمة المرور</label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                placeholder="••••••••"
+                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all font-medium"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 space-y-3 relative z-10">
+            <button
+              onClick={handleSubmit}
+              className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-xl hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all active:scale-95 font-bold text-sm flex items-center justify-center gap-2"
+            >
+              <span>{editingUser ? 'تحديث البيانات' : 'حفظ المستخدم'}</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+
+            {editingUser && (
+              <button
+                onClick={() => {
+                  setEditingUser(null);
+                  resetForm();
+                }}
+                className="w-full py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition-all font-bold text-sm"
+              >
+                إلغاء
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Users Table */}
+        {/* Right Side: Users List & Activity */}
         <div className="flex-1 bg-white/60 backdrop-blur-xl rounded-2xl shadow-soft border border-white/40 flex flex-col overflow-hidden">
           <div className="p-5 border-b border-gray-100/50">
             <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-              <span>👥</span>
+              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
               قائمة المستخدمين
             </h2>
           </div>
@@ -278,7 +291,11 @@ const Users = () => {
                   <tr>
                     <td colSpan={4} className="px-4 py-12 text-center text-gray-400">
                       <div className="flex flex-col items-center gap-2">
-                        <span className="text-4xl opacity-50">🔍</span>
+                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-2">
+                          <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                        </div>
                         <p className="font-medium">لا يوجد مستخدمون مطابقون للبحث</p>
                       </div>
                     </td>
